@@ -1,9 +1,14 @@
-const z = 10
+import figlet from "figlet";
 
-const read = (text:string) => { 
-    return  text                
-}
 
-const msg = read("Hello world!")
 
-console.log(msg);
+const server = Bun.serve({
+    port : 3000,
+    fetch(req){
+
+        const body = figlet.textSync("Here we go guys, we are here to learn bun!");
+        return new Response(body);
+    }
+});
+
+console.log("Listening on PORT http://localhost:${server.port}");
