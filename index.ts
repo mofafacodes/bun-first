@@ -20,9 +20,23 @@ const server = Bun.serve({
         return new Response(body);
         }
 
+        //handle console.error();
+        if (url.pathname === "/feed"){
+            throw new Error("Could not fetch feed"); 
+        }
+
         const body = figlet.textSync("404!");
         return new Response(body);
        
+    },
+
+    error(error){
+        return new Response(`<pre> ${error} \n ${error.stack} </pre>`, 
+        {
+            headers: {
+                "Content-Type": "text/html"
+            }
+        })
     }
 });
 
