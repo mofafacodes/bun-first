@@ -25,6 +25,12 @@ const server = Bun.serve({
             throw new Error("Could not fetch feed"); 
         }
 
+        //file streaming
+        if (url.pathname === "/greet"){
+            const body = new Response(Bun.file('./greet.txt'))
+            return body;
+        }
+
         const body = figlet.textSync("404!");
         return new Response(body);
        
